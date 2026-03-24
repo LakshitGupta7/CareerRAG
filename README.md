@@ -2,7 +2,7 @@
 
 A **Retrieval-Augmented Generation (RAG)** based GenAI application that analyzes resumes against job descriptions to generate **structured insights, match scores, skill gaps, and interview questions** — all backed by **evidence from the documents**.
 
----
+
 
 ## 📌 Features
 
@@ -16,7 +16,6 @@ A **Retrieval-Augmented Generation (RAG)** based GenAI application that analyzes
 - 🧾 Evidence-backed responses with **chunk-level citations**
 - 🎨 Clean UI with structured sections (Streamlit)
 
----
 
 ## 🧠 Architecture
 
@@ -32,8 +31,6 @@ Validation Pass (Grounding Check)
 ↓
 Structured Output + UI Rendering
 
-
----
 
 ## ⚙️ Tech Stack
 
@@ -68,7 +65,6 @@ Structured Output + UI Rendering
 - Virtual Environment (`venv`)  
 - `python-dotenv`
 
----
 
 ## 📂 Project Structure
 CareerRAG/
@@ -82,8 +78,6 @@ CareerRAG/
 ├── requirements.txt
 └── README.md
 
-
----
 
 ## 🚀 Installation & Setup
 
@@ -114,8 +108,6 @@ GROQ_API_KEY=your_api_key_here
 streamlit run app.py
 ```
 
----
-
 ## 🧪 Example Use Cases
 
 - Resume screening for recruiters
@@ -123,7 +115,6 @@ streamlit run app.py
 - Interview preparation
 - Skill gap analysis
 
----
 
 ## 🔍 How It Works
 
@@ -147,7 +138,6 @@ Task-specific retrieval:
 ### 5. Validation
 - Second LLM pass checks if claims are supported by context
 
----
 
 ## 📊 Output Example
 
@@ -159,7 +149,6 @@ Task-specific retrieval:
 - Evidence Used (chunk citations)
 - Validation Report (Supported / Partial / Unsupported)
 
----
 
 ## 💡 Key Highlights
 
@@ -169,7 +158,6 @@ Task-specific retrieval:
 - Clean separation of concerns
 - Interview-ready system design
 
----
 
 ## 🔮 Future Improvements
 
@@ -179,13 +167,10 @@ Task-specific retrieval:
 - Multi-model comparison
 - Deployment (Docker / cloud)
 
----
 
 ## 📜 License
 
 MIT License
-
----
 
 ## 👨‍💻 Author
 
