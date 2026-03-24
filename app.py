@@ -491,7 +491,7 @@ if "last_validation_badge" not in st.session_state:
 # ---------------------------
 # Helper functions
 # ---------------------------
-def call_groq_with_fallback(user_prompt, system_prompt, temperature=0.2, max_tokens=800):
+def call_groq_with_fallback(user_prompt, system_prompt, temperature=0.2, max_tokens=800, stream=False):
     try:
         response = client.chat.completions.create(
             model="llama-3.1-8b-instant",
@@ -500,8 +500,11 @@ def call_groq_with_fallback(user_prompt, system_prompt, temperature=0.2, max_tok
                 {"role": "user", "content": user_prompt}
             ],
             temperature=temperature,
-            max_tokens=max_tokens
+            max_tokens=max_tokens,
+            stream=stream
         )
+        if stream:
+            return (chunk.choices[0].delta.content for chunk in response if chunk.choices[0].delta.content is not None)
         return response.choices[0].message.content
 
     except Exception:
@@ -512,8 +515,11 @@ def call_groq_with_fallback(user_prompt, system_prompt, temperature=0.2, max_tok
                 {"role": "user", "content": user_prompt}
             ],
             temperature=temperature,
-            max_tokens=max_tokens
+            max_tokens=max_tokens,
+            stream=stream
         )
+        if stream:
+            return (chunk.choices[0].delta.content for chunk in response if chunk.choices[0].delta.content is not None)
         return response.choices[0].message.content
 
 
@@ -709,31 +715,40 @@ if st.button("Run Analysis"):
         else:
             prompt = build_prompt(task_type, query, chunks)
 
-            with st.spinner("Generating response..."):
-                try:
-                    answer_text = call_groq_with_fallback(
+            try:
+                stream_container = st.empty()
+                with stream_container.container():
+                    st.markdown("### Streaming Answer...")
+                    answer_stream = call_groq_with_fallback(
                         user_prompt=prompt,
                         system_prompt="You are a precise AI assistant for grounded document analysis.",
                         temperature=0.2,
-                        max_tokens=800
+                        max_tokens=800,
+                        stream=True
                     )
+                    answer_text = st.write_stream(answer_stream)
 
-                    st.session_state.last_answer = answer_text
+                st.session_state.last_answer = answer_text
+                
+                # Clear the raw stream so the beautiful formatted UI takes over below without double-printing
+                stream_container.empty()
 
+                with st.spinner("Validating response..."):
                     validation_prompt = build_validation_prompt(answer_text, chunks)
 
                     validation_text = call_groq_with_fallback(
                         user_prompt=validation_prompt,
                         system_prompt="You are a strict validator for grounded document answers.",
                         temperature=0.0,
-                        max_tokens=500
+                        max_tokens=500,
+                        stream=False
                     )
 
-                    st.session_state.last_validation = validation_text
-                    st.session_state.last_validation_badge = get_validation_badge(validation_text)
+                st.session_state.last_validation = validation_text
+                st.session_state.last_validation_badge = get_validation_badge(validation_text)
 
-                except Exception as e:
-                    st.error(f"Generation/validation error: {e}")
+            except Exception as e:
+                st.error(f"Generation/validation error: {e}")
 
 
 # ---------------------------

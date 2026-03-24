@@ -5,3 +5,5 @@ faiss-cpu==1.7.4
 groq
 python-dotenv==1.0.1
 numpy==1.26.4
+langchain-text-splitters
+rank_bm25
