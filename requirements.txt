@@ -1,0 +1,7 @@
+streamlit==1.33.0
+pymupdf==1.23.26
+sentence-transformers==2.7.0
+faiss-cpu==1.7.4
+groq
+python-dotenv==1.0.1
+numpy==1.26.4
