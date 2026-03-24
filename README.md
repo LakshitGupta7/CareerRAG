@@ -91,19 +91,104 @@ CareerRAG/
 ```bash
 git clone https://github.com/your-username/CareerRAG.git
 cd CareerRAG
+```
 
 ### 2. Create Virtual Environment
 ```bash
 python -m venv venv
 venv\Scripts\activate   # Windows
+```
 
 ### 3. Install Dependencies
 ```bash
 pip install -r requirements.txt
+```
 
 ### 4. Add API key
+```bash
 GROQ_API_KEY=your_api_key_here
+```
 
 ### 5. Run app
 ```bash
 streamlit run app.py
+```
+
+---
+
+## 🧪 Example Use Cases
+
+- Resume screening for recruiters
+- Candidate self-evaluation
+- Interview preparation
+- Skill gap analysis
+
+---
+
+## 🔍 How It Works
+
+### 1. Document Processing
+- Resume and JD are parsed using PyMuPDF
+- Split into overlapping chunks
+
+### 2. Embeddings & Storage
+- Chunks are converted into embeddings
+- Stored in FAISS vector database
+
+### 3. Retrieval
+Task-specific retrieval:
+- Resume-only (summarization)
+- Resume + JD (matching)
+- JD-heavy (missing skills)
+
+### 4. Generation
+- LLM generates structured output using prompt engineering
+
+### 5. Validation
+- Second LLM pass checks if claims are supported by context
+
+---
+
+## 📊 Output Example
+
+- Candidate Overview
+- Core Technical Skills
+- Missing Skills
+- Match Score (with progress bar)
+- Recommendations
+- Evidence Used (chunk citations)
+- Validation Report (Supported / Partial / Unsupported)
+
+---
+
+## 💡 Key Highlights
+
+- Modular GenAI architecture
+- Evidence-backed responses (reduces hallucination)
+- Validation layer for reliability
+- Clean separation of concerns
+- Interview-ready system design
+
+---
+
+## 🔮 Future Improvements
+
+- Hybrid retrieval (semantic + keyword)
+- PDF report export
+- Highlight unsupported claims in output
+- Multi-model comparison
+- Deployment (Docker / cloud)
+
+---
+
+## 📜 License
+
+MIT License
+
+---
+
+## 👨‍💻 Author
+
+**Lakshit Gupta**  
+B.Tech CSE (AI/ML)  
+Lovely Professional University
