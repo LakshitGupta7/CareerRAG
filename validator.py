@@ -1,4 +1,10 @@
-def build_validation_prompt(answer_text, retrieved_chunks):
+"""
+CareerRAG — Validation Layer
+Second LLM pass to check whether the generated answer is grounded in context.
+"""
+
+
+def build_validation_prompt(answer_text: str, retrieved_chunks: list[dict]) -> str:
     context = "\n\n".join(
         [
             f"[{c['chunk_id']}] (source={c['source']}, score={c['score']:.4f})\n{c['text']}"
