@@ -6,3 +6,25 @@ __pycache__/
 .vscode/
 .idea/
 synopsis
+
+# Terraform
+terraform/
+k8s/
+
+# Lab manuals
+*.docx
+
+# Tests
+tests/
+.pytest_cache/
+
+# Docker
+.dockerignore
+Dockerfile
+
+# Jenkins
+Jenkinsfile
+
+# Misc
+README.md
+.gitignore

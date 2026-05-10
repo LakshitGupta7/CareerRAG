@@ -85,3 +85,28 @@ uploads/
 data/
 
 synopsis
+
+# ---------------------------
+# Terraform
+# ---------------------------
+terraform/.terraform/
+terraform/.terraform.lock.hcl
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+terraform/*.tfvars
+terraform/.terraform.tfstate.lock.info
+
+# ---------------------------
+# Kubernetes
+# ---------------------------
+k8s/configmap.yaml
+
+# ---------------------------
+# Lab Manuals (docx)
+# ---------------------------
+*.docx
+
+# ---------------------------
+# Docker
+# ---------------------------
+docker-compose.override.yml
