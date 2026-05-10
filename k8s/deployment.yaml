@@ -3,10 +3,8 @@ kind: Deployment
 metadata:
   name: careerrag-app
   namespace: careerrag
-  labels:
-    app: careerrag
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: careerrag
@@ -26,20 +24,8 @@ spec:
                 name: careerrag-config
           resources:
             requests:
-              memory: "256Mi"
-              cpu: "250m"
-            limits:
-              memory: "512Mi"
+              memory: "2Gi"
               cpu: "500m"
-          livenessProbe:
-            httpGet:
-              path: /_stcore/health
-              port: 8501
-            initialDelaySeconds: 30
-            periodSeconds: 10
-          readinessProbe:
-            httpGet:
-              path: /_stcore/health
-              port: 8501
-            initialDelaySeconds: 15
-            periodSeconds: 5
+            limits:
+              memory: "3Gi"
+              cpu: "1000m"
