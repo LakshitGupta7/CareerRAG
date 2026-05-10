@@ -4,8 +4,11 @@ WORKDIR /app
 
 # System deps for PyMuPDF
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends gcc libffi-dev && \
+    apt-get install -y --no-install-recommends gcc libffi-dev curl && \
     rm -rf /var/lib/apt/lists/*
+
+# Install CPU-only PyTorch FIRST (prevents 2GB+ CUDA download)
+RUN pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
