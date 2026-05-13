@@ -63,11 +63,43 @@ Validation Pass (grounding check)
 - Real-time streaming responses
 - Markdown export
 
-### ⚙️ Infrastructure
-- Python 3.11+
-- Docker support
-- `python-dotenv` for config
-- Centralized `config.py` for all tuneable constants
+### 🛠️ DevOps & Infrastructure
+| Component | Technology |
+|---|---|
+| IaC | Terraform (AWS) |
+| CI/CD | Jenkins (Pipelines) |
+| Container Registry | Docker Hub |
+| Orchestration | Kubernetes (Self-managed Kubeadm) |
+| Monitoring | Prometheus + Grafana |
+| OS / Host | Ubuntu 22.04 LTS (AWS EC2) |
+
+---
+
+## 🛠️ DevOps Pipeline
+
+The application is deployed using a complete end-to-end DevOps lifecycle, ensuring high availability, automated delivery, and deep observability.
+
+### 1. Infrastructure as Code (Terraform)
+- **AWS Provisioning**: Automated setup of 2x `c7i-flex.large` EC2 instances (Master & Worker).
+- **Security Groups**: Dynamic configuration of security groups allowing ports for K8s (6443, 10250), NodePort (30000-32767), and Monitoring (9090, 3000).
+
+### 2. CI/CD Pipeline (Jenkins)
+- **Source Control**: GitHub integration triggers automated builds.
+- **Docker Build**: Automated creation of lightweight, CPU-optimized Python images.
+- **Push to Registry**: Secure push to Docker Hub (`lakshitgupta07/careerrag`).
+- **Kubernetes Deployment**: Rolling updates to the cluster via `kubectl`.
+
+### 3. Kubernetes Orchestration
+- **Self-Managed Cluster**: Multi-node cluster built using `kubeadm`.
+- **Deployment Strategy**: Replicas managed with rolling updates and resource limits (2Gi/3Gi RAM).
+- **Service Layer**: NodePort service exposing the application on port `30851`.
+
+### 4. Monitoring & Observability
+- **Prometheus**: Native installation on the Master node scraping metrics from Node Exporters.
+- **Node Exporter**: Deployed on both nodes to monitor CPU, RAM, Disk, and Network.
+- **Grafana**: Interactive dashboards visualizing cluster health and application performance.
+
+---
 
 
 ## 📂 Project Structure

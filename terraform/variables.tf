@@ -14,6 +14,6 @@ variable "instance_type" {
 }
 
 variable "key_pair_name" {
-  description = "Name of your existing AWS key pair"
+  description = "kubernetespair"
   type        = string
 }
